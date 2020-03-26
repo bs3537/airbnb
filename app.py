@@ -38,8 +38,7 @@ def create_app():
     def prediction():
         data = request.get_json(force=True)
         model = joblib.load(open('airbnb_model.sav', 'rb'))
-        features = [np.array(data)]
-        prediction = model.predict(features)
+        prediction = model.predict([[np.array(data['room_type'], ['neighbourhood_group'])]])
         output = round(prediction[0])
         return jsonify(output)
     return app
