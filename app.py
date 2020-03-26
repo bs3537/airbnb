@@ -9,7 +9,6 @@ from flask_cors import CORS
 
 import traceback
 
-#https://hackernoon.com/machine-learning-w22g322x: start March 26
 
 app = Flask(__name__,template_folder='templates')
 cors = CORS(app)
