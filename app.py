@@ -1,4 +1,4 @@
-#uses same template as boston housing with categorical variables encoded numbers coming from the web page
+
 
 from flask import Flask, request, redirect, url_for, flash, jsonify, render_template
 import pickle 
