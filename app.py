@@ -25,14 +25,23 @@ def create_app():
 
     @app.route('/predict', methods=['POST', 'GET'])
     def predict():
-        joblib.load(open('airbnb_model.sav', 'rb'))
+        model = joblib.load(open('airbnb_model.sav', 'rb'))
         int_features = [int(x) for x in request.form.values()]
         final_features = [np.array(int_features)]
         prediction = model.predict(final_features)
         output = round(prediction[0])
         #return render_template('index.html', prediction_text='The predicted home price is = $ {}'.format(output))
         return jsonify(output)
+    
+    @app.route('/api/', methods=['POST'])
+    def makecalc():
+        data = request.get_json()
+        model = joblib.load(open('airbnb_model.sav', 'rb'))
+        prediction = np.array2string(model.predict(data))
 
+        return jsonify(prediction)
+    return app
 
 if __name__ == "__main__":
+    model = joblib.load(open('airbnb_model.sav', 'rb'))
     app.run(debug=True)
