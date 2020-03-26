@@ -33,7 +33,7 @@ def create_app():
         #return render_template('index.html', prediction_text='The predicted home price is = $ {}'.format(output))
         return jsonify(output)
     
-    @app.route('/api/', methods=['POST'])
+    @app.route('/api/', methods=['POST', 'GET'])
     def makecalc():
         data = request.get_json()
         model = joblib.load(open('airbnb_model.sav', 'rb'))
