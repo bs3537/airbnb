@@ -6,6 +6,7 @@ import joblib
 import json
 import numpy as np
 import requests
+import request
 import pandas as pd
 from flask_cors import CORS
 
@@ -37,9 +38,10 @@ def create_app():
     def makecalc():
         data = request.get_json()
         model = joblib.load(open('airbnb_model.sav', 'rb'))
-        prediction = np.array2string(model.predict(data))
-
-        return jsonify(prediction)
+        features = [np.array(data)]
+        prediction = model.predict(features)
+        output = round(prediction[0])
+        return jsonify(output)
     return app
 
 if __name__ == "__main__":
