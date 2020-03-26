@@ -2,7 +2,6 @@
 
 from flask import Flask, request, redirect, url_for, flash, jsonify, render_template
 import pickle 
-import joblib
 import json
 import numpy as np
 import requests
@@ -10,13 +9,19 @@ import request
 import pandas as pd
 from flask_cors import CORS
 
+import traceback
+
 #https://hackernoon.com/machine-learning-w22g322x: start March 26
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder='templates')
 cors = CORS(app)
 
 def create_app():
-    model = joblib.load(open('airbnb_model.sav', 'rb'))
+    with open('airbnb_model.pkl', 'rb') as f:
+    model = pickle.load(f)
+ 
+    with open('model_columns.pkl', 'rb') as f:
+    model_columns = pickle.load(f)
 
 #################APP ROUTES####################
 
