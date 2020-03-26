@@ -10,7 +10,7 @@ import request
 import pandas as pd
 from flask_cors import CORS
 
-#https://www.kdnuggets.com/2019/10/easily-deploy-machine-learning-models-using-flask.html
+#https://hackernoon.com/machine-learning-w22g322x: start March 26
 
 app = Flask(__name__)
 cors = CORS(app)
